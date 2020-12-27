@@ -4,41 +4,39 @@ interface Values {
   odd: number,
 }
 
-const sumValues = {total: 0, even: 0, odd: 0};
+const values = {total: 0, even: 0, odd: 0};
 
-function loop (initial: number, finale: number, sum: number) : number {
-  if(initial <= finale) {
-    sum += initial;
-  }
-  return sum;
+function loop (initial: number, finale: number) : boolean {
+  const inLoop = initial <= finale;
+  return inLoop;
 }
 
 export function sumAllNumber(initial: number, finale: number): Values {
-  if(initial <= finale) {
-    sumValues.total += initial;
+  if(loop(initial, finale)) {
+    values.total += initial
     sumAllNumber(initial + 1, finale);
   }
    
-  return sumValues;
+  return values;
 }
 
 export function sumAllEvenNumber(initial: number, finale: number) : Values {  
-  if(initial <= finale) {
+  if(loop(initial, finale)) {
     if(initial % 2 === 0) {
-      sumValues.even += initial;
+      values.even += initial;
     }
     sumAllEvenNumber(initial + 1, finale);
   }
 
-  return sumValues;
+  return values;
 }
 
 export function sumAllOddNumber(initial: number, finale: number) : Values {
-  if(initial <= finale) {
+  if(loop(initial, finale)) {
     if(initial % 2 !== 0) {
-      sumValues.odd += initial;
+      values.odd += initial;
     }
     sumAllOddNumber(initial + 1, finale);
   }
-  return sumValues;
+  return values;
 }
